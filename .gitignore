@@ -151,3 +151,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Для всех .NET‑проектов во всём репозитории
+**/bin/
+**/obj/
+
