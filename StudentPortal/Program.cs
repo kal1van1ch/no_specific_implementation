@@ -11,7 +11,6 @@ Console.WriteLine("1. WebApplicationBuilder создан");
 Console.WriteLine($"2. Окружение: {builder.Environment.EnvironmentName}");
 
 builder.Services.AddStudentPortalServices();
-builder.Services.AddSingleton(builder.Services); 
 
 var app = builder.Build();
 
@@ -42,7 +41,7 @@ app.MapWhen(context => context.Request.Query.ContainsKey("format") && context.Re
     });
 });
 
-app.MapEndpoints();
+app.MapEndpoints(builder.Services);
 
 app.Run();
 
