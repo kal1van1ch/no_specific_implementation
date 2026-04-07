@@ -7,13 +7,22 @@ public static class DIEndpoint {
 
         app.MapGet("/di/services", () => {
             var sb = new StringBuilder();
-            sb.AppendLine("Info about services from IServiceCollection");
+            sb.Append("<h1>Information about services</h1>");
+            sb.Append("<table>");
 
-            foreach(var elem in service.Take(10)) {
-                sb.AppendLine($"Name: {elem.ServiceType.Name}            LifeTime: {elem.Lifetime}");
+            sb.Append("<tr><th>Type</th><th>Lifetime</th><th>Implementation</th></tr>");
+
+            foreach (var serv in service.Take(10)){
+                sb.Append("<tr>");
+                sb.Append($"<td>{serv.ServiceType.FullName}</td>");
+                sb.Append($"<td>{serv.Lifetime}</td>");
+                sb.Append($"<td>{serv.ImplementationType?.FullName}</td>");
+                sb.Append("</tr>");
             }
 
-            return sb.ToString();
+            sb.Append("</table>");
+
+            return Results.Text(sb.ToString(), "text/html; charset=utf-8");
         });
     }
 }

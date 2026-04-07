@@ -14,8 +14,8 @@ public class TokenMiddleware{
         var token = context.Request.Query["token"];
 
         if (token != _realToken){
+            context.Items["AccessError"] = "Token is gaddem bad";
             context.Response.StatusCode = 403;
-            await context.Response.WriteAsync("Very bad token ayayayayyyyyyyy");
         }
         else{
             await _next(context);
