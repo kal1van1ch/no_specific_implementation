@@ -14,10 +14,21 @@ public class EnvironmentReportService : IEnvironmentReportService
     public string BuildReport()
     {
         var sb = new StringBuilder();
+
         sb.AppendLine($"EnvironmentName: {_env.EnvironmentName}");
         sb.AppendLine($"ApplicationName: {_env.ApplicationName}");
-        sb.AppendLine($"ContentRootPath: {_env.ContentRootPath}");
-        sb.AppendLine($"WebRootPath: {_env.WebRootPath}");
+
+        switch (_env.EnvironmentName) {
+            case "Development":
+                sb.AppendLine($"ContentRootPath: {_env.ContentRootPath}");
+                sb.AppendLine($"WebRootPath: {_env.WebRootPath ?? "No WebRootPath"}");
+                sb.AppendLine($"OS Version: {System.Environment.OSVersion}");
+                break;
+            default:
+                sb.AppendLine("Extra info was hidden");
+                break;
+        }
+
         return sb.ToString();
     }
 }

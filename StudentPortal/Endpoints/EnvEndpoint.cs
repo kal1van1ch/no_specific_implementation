@@ -1,16 +1,23 @@
 namespace StudentPortal.Endpoints;
-using Microsoft.Extensions.Primitives;
 using StudentPortal.Extensions;
 using StudentPortal.Services;
 
 
 public static class EnvEndpoint {
     public static void MapEnvEndpoint(this WebApplication app) {
-        app.MapGet("/env", (IEnvironmentReportService env) => {            
-            app.CheckEnv();
+        app.Map("/env", envMap => {            
+            envMap.CheckEnv();
 
-            
-            return env.BuildReport();
+
+            envMap.Run(async context => {
+
+                var env = context.RequestServices.GetRequiredService<IEnvironmentReportService>();
+                
+                var envName = context.Items["realEnvName"]!.ToString();
+                app.Environment.EnvironmentName = envName!;
+
+                await context.Response.WriteAsync(env.BuildReport());
+            });
         });
     }
 }

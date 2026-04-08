@@ -12,11 +12,11 @@ public class EnvMiddleware {
     }
 
     public async Task InvokeAsync(HttpContext context) {
-        List<string> lstOfEnvnames = new List<string>() { "Development", "Production", "Staging" };
+        List<string> lstOfEnvnames = new List<string>() { "Development", "Production" };
 
-        var envName = context.Request.Query["envName"];
+        var envName = context.Request.Query["envName"].ToString();
 
-        if(StringValues.IsNullOrEmpty(envName)) {
+        if(string.IsNullOrEmpty(envName)) {
             envName = "Development";
         }
 
@@ -25,6 +25,7 @@ public class EnvMiddleware {
             context.Items["AccessError"] = $"Access denied, no such environment: {envName}";
         }
         else {
+            context.Items["realEnvName"] = envName;
             await _next(context);
         }
     }
