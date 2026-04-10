@@ -5,4 +5,6 @@ AdminMiddleware.cs, в котором я получал значение клю�
 Перед переходом в /admin проверяется значение ключа sudo аналогично проверке токена
 перед переходом в /report. Аналогично для TokenExt... был написан файл AdminExt...
 
-
+3) Сделал возможность разного вывода информации для Development и Production через обработку Query. 
+Механизм схож с проверкой на админа. Для запроса сервиса пришлось изменить подход, запрашивая его через
+context.RequestServices.GetRequiredService<IEnvironmentReportService>();.
