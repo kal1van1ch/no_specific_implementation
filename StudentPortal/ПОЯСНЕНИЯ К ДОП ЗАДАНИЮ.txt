@@ -8,3 +8,5 @@ AdminMiddleware.cs, в котором я получал значение клю�
 3) Сделал возможность разного вывода информации для Development и Production через обработку Query. 
 Механизм схож с проверкой на админа. Для запроса сервиса пришлось изменить подход, запрашивая его через
 context.RequestServices.GetRequiredService<IEnvironmentReportService>();.
+
+4) Добавил логирование во все middleware

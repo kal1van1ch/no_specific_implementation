@@ -8,7 +8,6 @@ public static class EnvEndpoint {
         app.Map("/env", envMap => {            
             envMap.CheckEnv();
 
-
             envMap.Run(async context => {
 
                 var env = context.RequestServices.GetRequiredService<IEnvironmentReportService>();
