@@ -6,7 +6,7 @@ public static class RootEndpoint {
         app.MapGet("/", () => {
             return Results.Text($"""
             {"StudentPortal:"}
-            {"/tools/time\n/tools/date\n/tools/info\n/env\n/secure/report\n/di/services"}
+            {"/tools/time\n/tools/date\n/tools/info\n/env\n/secure/admin/report\n/di/services"}
             """);
         });
     }
