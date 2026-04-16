@@ -26,7 +26,7 @@ public static class DiagEndpoint {
                 }
             };
 
-            return result;
+            return Results.Ok(result);
         });
     }
 }

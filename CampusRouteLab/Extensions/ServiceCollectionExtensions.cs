@@ -9,7 +9,7 @@ public static class ServiceCollectionExtensions {
         services.AddSingleton<IAppInfoService, AppInfoService>();
         services.AddScoped<IRequestContextService, RequestContextService>();
         services.AddTransient<ITransientMarkerService, TransientMarkerService>();
-        services.AddSingleton<DiagnosticsReportService>();
+        services.AddTransient<DiagnosticsReportService>();
 
         return services;
     }
