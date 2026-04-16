@@ -1,4 +1,6 @@
-namespace CampusRouteLab.Endpoints;
+namespace CampusRouteLab.Extensions;
+
+using CampusRouteLab.Endpoints;
 
 
 public static class EndpointsExtension {

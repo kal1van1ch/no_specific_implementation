@@ -1,4 +1,6 @@
-namespace CampusRouteLab.Services;
+namespace CampusRouteLab.Extensions;
+
+using CampusRouteLab.Services;
 
 
 public static class ServiceCollectionExtensions {
