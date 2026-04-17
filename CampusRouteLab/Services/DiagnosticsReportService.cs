@@ -2,16 +2,16 @@ namespace CampusRouteLab.Services;
 
 
 public class DiagnosticsReportService {
-    public IAppInfoService app { get; }
+    public IAppInfoService appInfo { get; }
     public ITransientMarkerService market { get; }
     public IRequestContextService request { get; }
 
     public DiagnosticsReportService(
-        IAppInfoService app,
+        IAppInfoService appInfo,
         ITransientMarkerService market,
         IRequestContextService request
     ) {
-        this.app = app;
+        this.appInfo = appInfo;
         this.market = market;
         this.request = request;
     }

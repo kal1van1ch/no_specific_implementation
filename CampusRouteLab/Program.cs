@@ -12,6 +12,7 @@ builder.Services.AddCampusServices();
 var app = builder.Build();
 
 app.UseMiddleware<ErrorMiddleware>();
+app.UseRequestAudit();
 
 app.MapEndpoints();
 
