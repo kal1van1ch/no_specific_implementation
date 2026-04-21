@@ -4,7 +4,8 @@ using CampusRouteLab.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.ConfigureHttpJsonOptions(options => {
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
     options.SerializerOptions.WriteIndented = true;
 });
 builder.Services.AddCampusServices();
