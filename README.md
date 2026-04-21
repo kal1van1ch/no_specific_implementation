@@ -104,9 +104,9 @@
 ```
 
 2. Получить задачу по ID <br/>
-`GET /api/tasks/{id}`<br/><br/>
+`GET /api/tasks/{id}`<br/>
 Если задача не найдена - вернуть:<br/>
-`404 Not Found`<br/><br/>
+`404 Not Found`<br/>
 
 3. Создать новую задачу<br/>
 `POST /api/tasks`
