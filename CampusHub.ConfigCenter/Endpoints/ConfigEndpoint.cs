@@ -9,8 +9,10 @@ public static class ConfigEndpoint {
             return $"""
             Portal:Title: {config["Portal:Title"]}
             Portal:Semester: {config["Portal:Semester"]}
-            Portal:Admin:Name {config["Portal:Admin:Name"]}
-            Portal:Admin:Email {config["Portal:Admin:Email"]}
+            Portal:Admin:Name: {config["Portal:Admin:Name"]}
+            Portal:Admin:Email: {config["Portal:Admin:Email"]}
+            Notifications:Sender: {config["Notifications:Sender"]}
+            Notifications:Channel: {config["Notifications:Channel"]}
             """;
         });
 
@@ -18,23 +20,42 @@ public static class ConfigEndpoint {
             return config.GetSection("Portal");
         });
 
-        app.Map("/config/tree", (IConfiguration config) => RecursiveMethod(config.GetSection("Portal")));
+        app.Map("/config/tree", (IConfiguration config) => RecursiveMethod(config.GetSection("Portal"), 0));
+
+        app.Map("/config/connection", (IConfiguration config) => {
+            string val = config.GetSection("ConnectionStrings:DefaultConnection")
+            .Value ?? "no value in DefaultConnection";
+
+            return val;
+        });
+
+        app.Map("/config/providers", (IConfiguration config) => {
+            var root = (IConfigurationRoot)config;
+            var sb = new StringBuilder();
+
+            foreach (var r in root.Providers) {
+                sb.AppendLine(r.ToString());
+            }
+
+            return sb.ToString();
+        });
     }
 
-    private static string RecursiveMethod(IConfiguration configSection) {
+    private static string RecursiveMethod(IConfiguration configSection, int indentationLevel) {
 
         var sb = new StringBuilder();
 
         foreach (var sec in configSection.GetChildren()) {
-            sb.Append(sec.Key);
+
+            string indent = new string(' ', indentationLevel * 2);
+            sb.Append($"{indent}{sec.Key}: ");
 
             if (sec.Value == null) {
-                sb.Append("\n");
-                var newSb = RecursiveMethod(sec);
-                sb.AppendLine(newSb);
+                var newSb = RecursiveMethod(sec, indentationLevel + 1);
+                sb.Append($"{{\n{newSb}{indent}}}\n");
             }
             else {
-                sb.Append($": {sec.Value}\n");
+                sb.Append($"{sec.Value}\n");
             }
         }
 

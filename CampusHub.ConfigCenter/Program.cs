@@ -5,7 +5,9 @@ using CampusHub.ConfigCenter.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+builder.Configuration.AddIniFile("notifications.ini");
 builder.Configuration.AddJsonFile("appsettings.json");
+builder.Configuration.AddJsonFile("appsettings.Development.json");
 
 app.UseMiddleware<ErrorMiddleware>();
 
