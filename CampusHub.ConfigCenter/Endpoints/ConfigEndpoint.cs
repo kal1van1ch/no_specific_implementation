@@ -1,7 +1,8 @@
 namespace CampusHub.ConfigCenter.Endpoints;
 
 using System.Text;
-
+using CampusHub.ConfigCenter.Models;
+using Microsoft.Extensions.Options;
 
 public static class ConfigEndpoint {
     public static void MapConfigEndpoint(this WebApplication app) {
@@ -38,6 +39,54 @@ public static class ConfigEndpoint {
             }
 
             return sb.ToString();
+        });
+
+        app.Map("/config/custom", (IConfiguration config) => {
+            return $"""
+            property1: {config["property1"]}
+            property2: {config["property2"]}
+            property3: {config["property3"]}
+            """;
+        });
+
+        app.Map("/config/bind", (IConfiguration config) => {
+            var obj = config.GetSection("Portal").Get<PortalOptions>()!;
+
+            return $"""
+            Title: {obj.Title}
+            Seemster: {obj.Semester}
+            SupportEmail: {obj.SupportEmail}
+            Admin:
+                {obj.Admin.Name}
+                {obj.Admin.Email}
+            Modules: {string.Join(", ", obj.Modules)}
+            """;
+        });
+
+        app.Map("/config/options", (IOptions<NotificationOptions> notif, IOptions<PortalOptions> portal) => {
+            return $"""
+            Sender: {notif.Value.Sender}
+            Channel: {notif.Value.Channel}
+            Signature: {notif.Value.Signature}
+            Title: {portal.Value.Title}
+            Admin: 
+                {portal.Value.Admin.Name}
+                {portal.Value.Admin.Email}
+            """;
+        });
+
+        app.Map("/config/effective", (IConfiguration config) => {
+            return $"""
+            Show key conflict
+            Title: {config["Portal:Title"]}
+            Semester: {config["Portal:Semester"]}
+            SupportEmail: {config["Portal:SupportEmail"]}
+            Admin:Name: {config["Portal:Admin:Name"]}
+            Admin:Email: {config["Portal:Admin:Email"]}
+            Sender: {config["Notifications:Sender"]}
+            Signature: {config["Notifications:Signature"]}
+            CLI: {config["Notifications:Channel"]}
+            """;
         });
     }
 

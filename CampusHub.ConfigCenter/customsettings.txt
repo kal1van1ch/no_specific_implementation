@@ -1,0 +1,3 @@
+property1:1 test property
+property2:2 test property
+property3:3 test property

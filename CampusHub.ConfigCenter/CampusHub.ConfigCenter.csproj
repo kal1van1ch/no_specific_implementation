@@ -1,4 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <None Include="notifications.ini" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="portal.xml" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="customsettings.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
