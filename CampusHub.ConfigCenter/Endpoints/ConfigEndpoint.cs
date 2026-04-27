@@ -24,10 +24,8 @@ public static class ConfigEndpoint {
         app.Map("/config/tree", (IConfiguration config) => RecursiveMethod(config.GetSection("Portal"), 0));
 
         app.Map("/config/connection", (IConfiguration config) => {
-            string val = config.GetSection("ConnectionStrings:DefaultConnection")
-            .Value ?? "no value in DefaultConnection";
-
-            return val;
+            var val = config.GetConnectionString("DefaultConnection");
+            return val ?? "no value in DefaultConnection";
         });
 
         app.Map("/config/providers", (IConfiguration config) => {
