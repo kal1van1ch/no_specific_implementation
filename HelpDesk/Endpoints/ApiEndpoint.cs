@@ -14,7 +14,7 @@ public static class ApiEndpoint {
 
             var ticket = rep.GetById(id.Value);
 
-            if (ticket == null) return Results.NotFound();
+            if (ticket == null) return Results.NotFound(new { message = $"Ticket {id} not found" });
 
             return Results.Ok(ticket);
 
