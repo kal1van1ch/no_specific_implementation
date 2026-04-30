@@ -8,6 +8,10 @@ public static class EndpointExtension {
         app.MapRootEndpoint();
         app.MapAboutEndpoint();
         app.MapApiEndpoint();
+        app.MapStatusEndpoint();
+        app.MapRedirectEndpoint();
+        app.MapFilesEndpoint();
+        app.MapThrowEndpoint();
 
         return app;
     }

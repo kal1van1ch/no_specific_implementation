@@ -1,23 +1,31 @@
 namespace HelpDesk.Endpoints;
 
+using HelpDesk.Services;
 using System.Text.Json;
 using HelpDesk.Models;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 
 public static class ApiEndpoint {
     public static void MapApiEndpoint(this WebApplication app) {
-        app.Map("/api/tickets/{id:int?}", (int? id) => {
+        app.Map("/api/tickets/{id:int?}", (int? id, ITicketRepository rep) => {
+            if (id == null) return Results.Json(rep.GetAll());
 
-            string json = File.ReadAllText("Data/tickets.json");
-            var tickets = JsonSerializer.Deserialize<List<Ticket>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+            var ticket = rep.GetById(id.Value);
 
-            if (id == null) return Results.Json(tickets);
-
-            var ticket = tickets.FirstOrDefault(t => t.Id == id);
-
-            if (ticket == null) return Results.NotFound("Нет заявки с таким ID");
+            if (ticket == null) return Results.NotFound();
 
             return Results.Ok(ticket);
+
+        }).WithName("GetAllOrNotTickets");
+
+        app.Map("/api/tickets/create", (string? title, int priority, ITicketRepository rep) => {
+            if (title == null) return Results.Json(new { message = "У новой заявки нет имени" }, statusCode: 400);
+
+            var newTicket = rep.Create(title, priority);
+
+            return Results.Ok(newTicket);
         });
     }
 }
