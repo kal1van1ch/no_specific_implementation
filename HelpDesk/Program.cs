@@ -8,6 +8,8 @@ builder.Services.AddTransient<ITicketRepository, InMemoryTicketRepository>();
 
 var app = builder.Build();
 
+// app.Environment.EnvironmentName = "Production";
+
 if (app.Environment.IsDevelopment()) {
     app.UseDeveloperExceptionPage();
 }

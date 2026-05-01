@@ -5,7 +5,7 @@ using HelpDesk.Extensions;
 
 public static class RootEndpoint {
     public static void MapRootEndpoint(this WebApplication app) {
-        app.Map("/", (IEnumerable<EndpointDataSource> endpds) => {
+        app.Map("/", (IEnumerable<EndpointDataSource> endpds, ILogger<Program> logger) => {
             string descr = @"
             Это учебный сервис заявок в службу поддержки.</br>
             Приложение должно показывать список заявок, </br>
@@ -38,7 +38,8 @@ public static class RootEndpoint {
             </html>
             ";
 
+            logger.LogInformation("Выведена информация по проекту и маршрутам");
             return Results.Extensions.GetListPathHtml(code);
-        });
+        }).WithName("Главная страница");
     }
 }
