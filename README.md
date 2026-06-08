@@ -75,11 +75,7 @@
 #### Обязательные файлы и ключи конфигурации
 | Файл | Назначение | Что должно лежать внутри | Примечание |
 | - | - | - | - |
-| appsettings.json  | Базовая конфигурация | Portal:Title, Portal:Semester, 
-Portal:Admin:Name, 
-Portal:Admin:Email, Portal:Modules, 
-ConnectionStrings:DefaultConnection, 
-FeatureFlags:* | Обязателен |
+| appsettings.json  | Базовая конфигурация | Portal:Title, Portal:Semester, Portal:Admin:Name, Portal:Admin:Email, Portal:Modules, ConnectionStrings:DefaultConnection, FeatureFlags:* | Обязателен |
 | appsettings.Development.json | Переопределение для Development  | Минимум два ключа, совпадающих с appsettings.json  | Обязателен |
 | portal.xml  | Дополнительные настройки портала | Например: Portal:CampusName, Portal:Dean или Portal:Building | Обязателен |
 | notifications.ini  | Настройки уведомлений  | Секция Notifications с Sender, Channel, Signature | Обязателен |
