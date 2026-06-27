@@ -249,7 +249,7 @@
 `GET /api/tasks`
 
 Пример ответа:
-```
+```properties
 [
    {
       "id": 1,
@@ -269,7 +269,7 @@
 `POST /api/tasks`
 
 Тело запроса:
-```
+```properties
 {
    "title": "Изучить ASP.NET Core",
    "description": "Minimal API"
@@ -282,7 +282,7 @@
 
 4. Обновить задачу<br/>
 `PUT /api/tasks/{id}`
-```
+```properties
 {
    "title": "Изучить ASP.NET Core",
    "description": "Minimal API и Swagger",
@@ -378,12 +378,12 @@
 2. Для элемента с классом `special` устанавливает красный цвет текста.
 3. Для каждого третьего параграфа (относительно общего списка) добавляет зелёный фон.
 4. Родительскому контейнеру добавляет рамку.
-```
+```properties
 <div id="container">
- <p class="text">Первый параграф</p>
- <p class="text special">Второй параграф</p>
- <p class="text">Третий параграф</p>
- <p class="text">Четвёртый параграф</p>
+   <p class="text">Первый параграф</p>
+   <p class="text special">Второй параграф</p>
+   <p class="text">Третий параграф</p>
+   <p class="text">Четвёртый параграф</p>
 </div>
 ```
 
@@ -393,7 +393,7 @@
 2. Для активного элемента (с классом `active`) добавляет класс `highlight` (заранее создайте этот класс в `CSS`, например, `highlight { background-color: yellow; }`).
 3. Вычисляет суммарную стоимость всех товаров на основе `data-атрибутов`.
 4. Находит товар с максимальной ценой и выводит его название в консоль.
-```
+```properties
 <div class="item" data-price="100">Товар 1</div>
 <div class="item active" data-price="200">Товар 2</div>
 <div class="item" data-price="150">Товар 3</div>
@@ -461,9 +461,11 @@
 
 ## Другие проекты
 ### Ниже представлен список проектов, при реализации которых использовались навыки, полученные при выполнении практик выше:
-- [REVO](https://github.com/kal1van1ch/REVO)
-- [easy_code](https://github.com/kal1van1ch/easy_code)
+- [WorDrop-Backend](https://github.com/kal1van1ch/WorDrop-Backend)
+- [WorDrop-Frontend](https://github.com/kal1van1ch/WorDrop-Frontend)
 - [gen_random_things](https://github.com/kal1van1ch/gen_random_things)
+- [easy_code](https://github.com/kal1van1ch/easy_code)
+- [REVO](https://github.com/kal1van1ch/REVO)
 
 
 
